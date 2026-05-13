@@ -1,2 +1,2 @@
 # Noe_Julian-Proyecto1
-El Recorrido del Caballo (Knight’s Tour) 
+Recorrido del caballo en ajedrez (Knight’s Tour)
