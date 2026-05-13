@@ -2,7 +2,11 @@ import assert from 'node:assert/strict'
 import { contarCaminosCaballo } from '../algoritmos/conteoCaminos.js'
 import { copiarTableroConObstaculo, crearTablero } from '../utils/tablero.js'
 
-// Prueba el caso base cuando K es cero
+/**
+ * Prueba el caso base cuando K es cero.
+ *
+ * @returns {void}
+ */
 function probarCeroMovimientos() {
   const tablero = crearTablero(4)
   const origen = { fila: 0, columna: 0 }
@@ -16,7 +20,11 @@ function probarCeroMovimientos() {
   assert.equal(resultadoOtro.total, 0)
 }
 
-// Prueba un salto directo del caballo
+/**
+ * Prueba un salto directo del caballo.
+ *
+ * @returns {void}
+ */
 function probarUnMovimiento() {
   const tablero = crearTablero(4)
   const origen = { fila: 0, columna: 0 }
@@ -26,7 +34,11 @@ function probarUnMovimiento() {
   assert.equal(resultado.total, 1)
 }
 
-// Prueba los dos caminos para volver al origen en dos movimientos
+/**
+ * Prueba los dos caminos para volver al origen en dos movimientos.
+ *
+ * @returns {void}
+ */
 function probarDosMovimientos() {
   const tablero = crearTablero(4)
   const origen = { fila: 0, columna: 0 }
@@ -36,7 +48,11 @@ function probarDosMovimientos() {
   assert.equal(resultado.total, 2)
 }
 
-// Prueba que los obstáculos bloqueen el conteo
+/**
+ * Prueba que los obstáculos bloqueen el conteo.
+ *
+ * @returns {void}
+ */
 function probarObstaculos() {
   let tablero = crearTablero(4)
 
@@ -49,7 +65,11 @@ function probarObstaculos() {
   assert.equal(resultado.total, 0)
 }
 
-// Prueba que un K inválido no ejecute el conteo
+/**
+ * Prueba que un K inválido no ejecute el conteo.
+ *
+ * @returns {void}
+ */
 function probarMovimientosInvalidos() {
   const tablero = crearTablero(4)
   const origen = { fila: 0, columna: 0 }

@@ -11,7 +11,12 @@ const movimientosCaballo = [
   [2, -1],
 ]
 
-// Resuelve el recorrido del caballo usando backtracking
+/**
+ * Resuelve el recorrido del caballo usando backtracking.
+ *
+ * @param {Array<Array<object>>} tablero Tablero con obstáculos configurados.
+ * @returns {object} Resultado con pasos, estadísticas y mensaje.
+ */
 export function resolverRecorridoCaballo(tablero) {
   const tiempoInicio = Date.now()
   const tableroNumerico = crearTableroNumerico(tablero)
@@ -74,7 +79,18 @@ export function resolverRecorridoCaballo(tablero) {
   }
 }
 
-// Función recursiva principal del backtracking
+/**
+ * Función recursiva principal del backtracking.
+ *
+ * @param {Array<Array<number>>} tablero Tablero numérico usado por el algoritmo.
+ * @param {number} fila Fila actual del caballo.
+ * @param {number} columna Columna actual del caballo.
+ * @param {number} orden Número de visita que se intenta colocar.
+ * @param {number} totalLibres Cantidad de casillas que deben visitarse.
+ * @param {Array<object>} pasos Lista de pasos para animar el proceso.
+ * @param {object} estadisticas Contadores del proceso.
+ * @returns {boolean} Verdadero si encuentra una solución.
+ */
 function recorridoCaballo(tablero, fila, columna, orden, totalLibres, pasos, estadisticas) {
   if (orden > totalLibres) {
     return true
@@ -125,12 +141,24 @@ function recorridoCaballo(tablero, fila, columna, orden, totalLibres, pasos, est
   return false
 }
 
-// Revisa si el caballo puede caer en la casilla indicada
+/**
+ * Revisa si el caballo puede caer en la casilla indicada.
+ *
+ * @param {Array<Array<number>>} tablero Tablero numérico.
+ * @param {number} fila Fila que se desea revisar.
+ * @param {number} columna Columna que se desea revisar.
+ * @returns {boolean} Verdadero si el movimiento es válido.
+ */
 function validarMovimiento(tablero, fila, columna) {
   return estaDentroDelTablero(fila, columna, tablero.length) && tablero[fila][columna] === 0
 }
 
-// Convierte el tablero de objetos a números para trabajar más fácil
+/**
+ * Convierte el tablero de objetos a números para trabajar más fácil.
+ *
+ * @param {Array<Array<object>>} tablero Tablero de la interfaz.
+ * @returns {Array<Array<number>>} Tablero numérico para backtracking.
+ */
 function crearTableroNumerico(tablero) {
   const tableroNumerico = []
 
@@ -151,7 +179,12 @@ function crearTableroNumerico(tablero) {
   return tableroNumerico
 }
 
-// Busca la primera casilla libre para iniciar el recorrido
+/**
+ * Busca la primera casilla libre para iniciar el recorrido.
+ *
+ * @param {Array<Array<number>>} tablero Tablero numérico.
+ * @returns {object|null} Posición inicial o null si no existe.
+ */
 function buscarPrimeraCasillaLibre(tablero) {
   for (let i = 0; i < tablero.length; i++) {
     for (let j = 0; j < tablero[i].length; j++) {

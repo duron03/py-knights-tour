@@ -1,3 +1,12 @@
+/**
+ * Dibuja una casilla del tablero y permite marcar obstáculos.
+ *
+ * @param {object} props Propiedades del componente.
+ * @param {object} props.casilla Datos de la casilla.
+ * @param {boolean} props.estaEjecutando Indica si hay animación activa.
+ * @param {Function} props.onCambiarObstaculo Función para cambiar obstáculos.
+ * @returns {JSX.Element} Casilla del tablero.
+ */
 function Casilla({ casilla, estaEjecutando, onCambiarObstaculo }) {
   let claseColor = 'casilla clara'
   let texto = ''
@@ -18,13 +27,21 @@ function Casilla({ casilla, estaEjecutando, onCambiarObstaculo }) {
     claseColor += ' retroceso'
   }
 
+  if (casilla.estado === 'solucion') {
+    claseColor += ' solucion'
+  }
+
   if (casilla.esObstaculo) {
     texto = 'X'
   } else if (casilla.orden !== null) {
     texto = casilla.orden
   }
 
-  // Avisa cuál casilla fue seleccionada
+  /**
+   * Avisa cuál casilla fue seleccionada.
+   *
+   * @returns {void}
+   */
   function marcarCasilla() {
     onCambiarObstaculo(casilla.fila, casilla.columna)
   }

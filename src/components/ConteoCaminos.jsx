@@ -1,3 +1,15 @@
+/**
+ * Muestra el formulario para contar caminos con programación dinámica.
+ *
+ * @param {object} props Propiedades del componente.
+ * @param {object} props.datosConteo Datos de origen, destino y K.
+ * @param {boolean} props.estaEjecutando Indica si el recorrido está animándose.
+ * @param {Function} props.onCalcularConteo Función para ejecutar el conteo.
+ * @param {Function} props.onCambiarDatoConteo Función para actualizar datos.
+ * @param {object} props.resultadoConteo Resultado mostrado al usuario.
+ * @param {number} props.tamano Tamaño actual del tablero.
+ * @returns {JSX.Element} Panel de conteo de caminos.
+ */
 function ConteoCaminos({
   datosConteo,
   estaEjecutando,
@@ -6,6 +18,12 @@ function ConteoCaminos({
   resultadoConteo,
   tamano,
 }) {
+  /**
+   * Lee un input numérico y actualiza el dato correspondiente.
+   *
+   * @param {object} evento Evento del input.
+   * @returns {void}
+   */
   function cambiarDato(evento) {
     const numero = parseInt(evento.target.value, 10)
 
