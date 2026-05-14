@@ -1,5 +1,20 @@
 import { TAMANO_MAXIMO, TAMANO_MINIMO } from '../utils/tablero.js'
 
+/**
+ * Muestra los controles generales del tablero y recorrido.
+ *
+ * @param {object} props Propiedades del componente.
+ * @param {number} props.cantidadObstaculos Cantidad de obstáculos.
+ * @param {boolean} props.estaEjecutando Indica si hay animación activa.
+ * @param {Function} props.onCambiarTamano Función para cambiar tamaño.
+ * @param {Function} props.onIniciarRecorrido Función para iniciar backtracking.
+ * @param {Function} props.onLimpiarObstaculos Función para limpiar obstáculos.
+ * @param {Function} props.onReiniciarRecorrido Función para limpiar recorrido.
+ * @param {Function} props.onSaltarAnimacion Función para saltar animación.
+ * @param {boolean} props.puedeIniciar Indica si se puede iniciar.
+ * @param {number} props.tamano Tamaño actual del tablero.
+ * @returns {JSX.Element} Panel de controles.
+ */
 function Controles({
   cantidadObstaculos,
   estaEjecutando,
@@ -11,6 +26,12 @@ function Controles({
   puedeIniciar,
   tamano,
 }) {
+  /**
+   * Lee el tamaño elegido por el usuario.
+   *
+   * @param {object} evento Evento del input.
+   * @returns {void}
+   */
   function manejarCambioTamano(evento) {
     onCambiarTamano(parseInt(evento.target.value, 10))
   }

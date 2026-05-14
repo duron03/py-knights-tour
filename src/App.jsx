@@ -17,6 +17,7 @@ import {
   crearTablero,
   limpiarObstaculos,
   limpiarRecorrido,
+  resaltarSolucionFinal,
   validarTableroConObstaculos,
 } from './utils/tablero.js'
 
@@ -25,6 +26,11 @@ const TIEMPO_ANIMACION = 20
 const MENSAJE_INICIAL = 'Configure el tablero y presione iniciar.'
 const MENSAJE_CONTEO = 'Ingrese origen, destino y K.'
 
+/**
+ * Crea las estadísticas iniciales del recorrido.
+ *
+ * @returns {object} Estadísticas en cero.
+ */
 function crearEstadisticasVacias() {
   return {
     movimientosIntentados: 0,
@@ -33,6 +39,12 @@ function crearEstadisticasVacias() {
   }
 }
 
+/**
+ * Crea los datos iniciales del conteo de caminos.
+ *
+ * @param {number} tamano Tamaño actual del tablero.
+ * @returns {object} Datos iniciales para origen, destino y K.
+ */
 function crearDatosConteo(tamano) {
   return {
     origenFila: 1,
@@ -43,6 +55,11 @@ function crearDatosConteo(tamano) {
   }
 }
 
+/**
+ * Crea el resultado inicial del conteo de caminos.
+ *
+ * @returns {object} Resultado vacío para mostrar en pantalla.
+ */
 function crearResultadoConteoVacio() {
   return {
     total: 0,
@@ -51,6 +68,11 @@ function crearResultadoConteoVacio() {
   }
 }
 
+/**
+ * Componente principal de la aplicación.
+ *
+ * @returns {JSX.Element} Interfaz del proyecto.
+ */
 function App() {
   const [tamano, setTamano] = useState(TAMANO_INICIAL)
   const [tablero, setTablero] = useState(() => crearTablero(TAMANO_INICIAL))
@@ -76,7 +98,11 @@ function App() {
     }
   }, [])
 
-  // Detiene la animación actual si existe
+  /**
+   * Detiene la animación actual si existe.
+   *
+   * @returns {void}
+   */
   function detenerAnimacion() {
     if (animacion.current !== null) {
       clearInterval(animacion.current)
@@ -84,7 +110,12 @@ function App() {
     }
   }
 
-  // Cambia el tamaño y reinicia el tablero
+  /**
+   * Cambia el tamaño y reinicia el tablero.
+   *
+   * @param {number} nuevoTamano Nuevo tamaño seleccionado.
+   * @returns {void}
+   */
   function cambiarTamano(nuevoTamano) {
     if (estaEjecutando) {
       return
@@ -106,7 +137,13 @@ function App() {
     tableroAnimacion.current = null
   }
 
-  // Marca o quita un obstáculo
+  /**
+   * Marca o quita un obstáculo antes de ejecutar los algoritmos.
+   *
+   * @param {number} fila Fila seleccionada.
+   * @param {number} columna Columna seleccionada.
+   * @returns {void}
+   */
   function cambiarObstaculo(fila, columna) {
     if (estaEjecutando) {
       return
@@ -124,7 +161,11 @@ function App() {
     tableroAnimacion.current = null
   }
 
-  // Deja el tablero sin obstáculos
+  /**
+   * Deja el tablero sin obstáculos ni recorrido.
+   *
+   * @returns {void}
+   */
   function reiniciarObstaculos() {
     if (estaEjecutando) {
       return
@@ -140,7 +181,11 @@ function App() {
     tableroAnimacion.current = null
   }
 
-  // Limpia solo el recorrido encontrado o intentado
+  /**
+   * Limpia solo el recorrido encontrado o intentado.
+   *
+   * @returns {void}
+   */
   function reiniciarRecorrido() {
     if (estaEjecutando) {
       return
@@ -155,7 +200,13 @@ function App() {
     tableroAnimacion.current = null
   }
 
-  // Actualiza los datos usados para el conteo de caminos
+  /**
+   * Actualiza los datos usados para el conteo de caminos.
+   *
+   * @param {string} nombre Nombre del dato modificado.
+   * @param {number} valor Nuevo valor ingresado.
+   * @returns {void}
+   */
   function cambiarDatoConteo(nombre, valor) {
     setDatosConteo((datosActuales) => {
       return {
@@ -166,7 +217,11 @@ function App() {
     setResultadoConteo(crearResultadoConteoVacio())
   }
 
-  // Calcula cuántos caminos llegan al destino en K movimientos
+  /**
+   * Calcula cuántos caminos llegan al destino en K movimientos.
+   *
+   * @returns {void}
+   */
   function calcularConteoCaminos() {
     if (estaEjecutando) {
       return
@@ -191,7 +246,11 @@ function App() {
     setResultadoConteo(resultado)
   }
 
-  // Ejecuta el algoritmo y luego muestra los pasos en pantalla
+  /**
+   * Ejecuta el backtracking y luego muestra los pasos en pantalla.
+   *
+   * @returns {void}
+   */
   function iniciarRecorrido() {
     if (!puedeIniciar) {
       setMensajeRecorrido(validacionTablero.mensaje)
@@ -224,18 +283,30 @@ function App() {
         detenerAnimacion()
         setEstaEjecutando(false)
         setMensajeRecorrido(resultado.mensaje)
+        setTablero((tableroActual) => {
+          return resaltarSolucionFinal(tableroActual, resultado.encontroSolucion)
+        })
       }
     }, TIEMPO_ANIMACION)
   }
 
-  // Detiene la animación y muestra de una vez el tablero final
+  /**
+   * Detiene la animación y muestra de una vez el tablero final.
+   *
+   * @returns {void}
+   */
   function saltarAnimacion() {
     if (resultadoAnimacion.current === null || tableroAnimacion.current === null) {
       return
     }
 
     detenerAnimacion()
-    setTablero(aplicarPasosAlTablero(tableroAnimacion.current, resultadoAnimacion.current.pasos))
+    setTablero(
+      resaltarSolucionFinal(
+        aplicarPasosAlTablero(tableroAnimacion.current, resultadoAnimacion.current.pasos),
+        resultadoAnimacion.current.encontroSolucion,
+      ),
+    )
     setEstaEjecutando(false)
     setMensajeRecorrido(resultadoAnimacion.current.mensaje)
   }
@@ -244,7 +315,7 @@ function App() {
     <main className="aplicacion">
       <header className="encabezado">
         <h1>Recorrido del Caballo</h1>
-        <p>Paso 3: programación dinámica</p>
+        <p>Paso 4: visualización y documentación</p>
       </header>
 
       <section className="zona-trabajo">

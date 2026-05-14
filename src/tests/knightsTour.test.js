@@ -9,7 +9,13 @@ import {
   limpiarRecorrido,
 } from '../utils/tablero.js'
 
-// Revisa que el resultado tenga una casilla por cada número del recorrido
+/**
+ * Revisa que el resultado tenga una casilla por cada número del recorrido.
+ *
+ * @param {Array<Array<object>>} tablero Tablero resultante.
+ * @param {number} totalLibres Cantidad de casillas que debieron visitarse.
+ * @returns {void}
+ */
 function validarNumerosDelRecorrido(tablero, totalLibres) {
   const numeros = []
   const posiciones = []
@@ -44,7 +50,13 @@ function validarNumerosDelRecorrido(tablero, totalLibres) {
   }
 }
 
-// Revisa que dos posiciones formen un movimiento de caballo
+/**
+ * Revisa que dos posiciones formen un movimiento de caballo.
+ *
+ * @param {object} origen Posición de salida.
+ * @param {object} destino Posición de llegada.
+ * @returns {boolean} Verdadero si el salto es válido.
+ */
 function esSaltoCaballo(origen, destino) {
   const diferenciaFila = Math.abs(origen.fila - destino.fila)
   const diferenciaColumna = Math.abs(origen.columna - destino.columna)
@@ -55,7 +67,13 @@ function esSaltoCaballo(origen, destino) {
   )
 }
 
-// Aplica la lista de pasos como lo hace la interfaz
+/**
+ * Aplica la lista de pasos como lo hace la interfaz.
+ *
+ * @param {Array<Array<object>>} tablero Tablero inicial.
+ * @param {Array<object>} pasos Pasos del algoritmo.
+ * @returns {Array<Array<object>>} Tablero después de la animación.
+ */
 function crearTableroAnimado(tablero, pasos) {
   let tableroAnimado = limpiarRecorrido(tablero)
 
@@ -66,14 +84,24 @@ function crearTableroAnimado(tablero, pasos) {
   return tableroAnimado
 }
 
-// Aplica los pasos sin animación, como el botón para saltarla
+/**
+ * Aplica los pasos sin animación, como el botón para saltarla.
+ *
+ * @param {Array<Array<object>>} tablero Tablero inicial.
+ * @param {Array<object>} pasos Pasos del algoritmo.
+ * @returns {Array<Array<object>>} Tablero final.
+ */
 function crearTableroSinAnimacion(tablero, pasos) {
   const tableroLimpio = limpiarRecorrido(tablero)
 
   return aplicarPasosAlTablero(tableroLimpio, pasos)
 }
 
-// Prueba que el tablero 5x5 se pueda resolver y numerar completo
+/**
+ * Prueba que el tablero 5x5 se pueda resolver y numerar completo.
+ *
+ * @returns {void}
+ */
 function probarTableroConSolucion() {
   const tablero = crearTablero(5)
   const resultado = resolverRecorridoCaballo(tablero)
@@ -87,7 +115,11 @@ function probarTableroConSolucion() {
   validarNumerosDelRecorrido(tableroSinAnimacion, contarCasillasLibres(tablero))
 }
 
-// Prueba que el tablero 4x4 quede detectado como no resuelto
+/**
+ * Prueba que el tablero 4x4 quede detectado como no resuelto.
+ *
+ * @returns {void}
+ */
 function probarTableroSinSolucion() {
   const tablero = crearTablero(4)
   const resultado = resolverRecorridoCaballo(tablero)
@@ -97,7 +129,11 @@ function probarTableroSinSolucion() {
   assert.equal(resultado.estadisticas.retrocesos > 0, true)
 }
 
-// Prueba que los obstáculos no se pierdan durante la animación
+/**
+ * Prueba que los obstáculos no se pierdan durante la animación.
+ *
+ * @returns {void}
+ */
 function probarObstaculos() {
   let tablero = crearTablero(5)
 

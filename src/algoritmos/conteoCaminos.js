@@ -11,7 +11,15 @@ const movimientosCaballo = [
   [2, -1],
 ]
 
-// Cuenta caminos de A a B en exactamente K movimientos con programación dinámica
+/**
+ * Cuenta caminos de A a B en exactamente K movimientos con programación dinámica.
+ *
+ * @param {Array<Array<object>>} tablero Tablero con obstáculos configurados.
+ * @param {object} origen Casilla inicial.
+ * @param {object} destino Casilla final.
+ * @param {number} movimientos Cantidad exacta de movimientos.
+ * @returns {object} Resultado del conteo con total, tiempo y mensaje.
+ */
 export function contarCaminosCaballo(tablero, origen, destino, movimientos) {
   const tiempoInicio = Date.now()
   const validacion = validarDatosConteo(tablero, origen, destino, movimientos)
@@ -49,7 +57,16 @@ export function contarCaminosCaballo(tablero, origen, destino, movimientos) {
   }
 }
 
-// Suma los caminos que salen desde una casilla en el siguiente movimiento
+/**
+ * Suma los caminos que salen desde una casilla en el siguiente movimiento.
+ *
+ * @param {Array<Array<object>>} tablero Tablero con obstáculos.
+ * @param {Array<Array<number>>} actual Matriz del paso que se está calculando.
+ * @param {Array<Array<number>>} anterior Matriz del paso anterior.
+ * @param {number} fila Fila actual.
+ * @param {number} columna Columna actual.
+ * @returns {void}
+ */
 function sumarMovimientos(tablero, actual, anterior, fila, columna) {
   for (let i = 0; i < movimientosCaballo.length; i++) {
     const nuevaFila = fila + movimientosCaballo[i][0]
@@ -64,7 +81,15 @@ function sumarMovimientos(tablero, actual, anterior, fila, columna) {
   }
 }
 
-// Revisa que origen, destino y K sean válidos
+/**
+ * Revisa que origen, destino y K sean válidos.
+ *
+ * @param {Array<Array<object>>} tablero Tablero actual.
+ * @param {object} origen Casilla inicial.
+ * @param {object} destino Casilla final.
+ * @param {number} movimientos Cantidad exacta de movimientos.
+ * @returns {object} Resultado de validación.
+ */
 function validarDatosConteo(tablero, origen, destino, movimientos) {
   if (!Number.isInteger(movimientos) || movimientos < 0) {
     return {
@@ -100,12 +125,23 @@ function validarDatosConteo(tablero, origen, destino, movimientos) {
   }
 }
 
-// Revisa si la posición existe dentro del tablero
+/**
+ * Revisa si la posición existe dentro del tablero.
+ *
+ * @param {Array<Array<object>>} tablero Tablero actual.
+ * @param {object} posicion Posición que se desea revisar.
+ * @returns {boolean} Verdadero si la posición existe.
+ */
 function posicionValida(tablero, posicion) {
   return estaDentroDelTablero(posicion.fila, posicion.columna, tablero.length)
 }
 
-// Crea una matriz numérica inicializada en cero
+/**
+ * Crea una matriz numérica inicializada en cero.
+ *
+ * @param {number} tamano Tamaño de la matriz.
+ * @returns {Array<Array<number>>} Matriz de ceros.
+ */
 function crearMatrizCeros(tamano) {
   const matriz = []
 

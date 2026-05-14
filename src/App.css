@@ -136,6 +136,11 @@
   color: white;
 }
 
+.solucion {
+  background: #ffd43b;
+  color: #111;
+}
+
 .numero-casilla {
   position: absolute;
   top: 3px;

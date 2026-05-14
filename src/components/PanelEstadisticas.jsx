@@ -1,3 +1,16 @@
+/**
+ * Muestra el estado del tablero y las estadísticas del recorrido.
+ *
+ * @param {object} props Propiedades del componente.
+ * @param {number} props.cantidadLibres Cantidad de casillas libres.
+ * @param {number} props.cantidadObstaculos Cantidad de obstáculos.
+ * @param {boolean} props.estaEjecutando Indica si hay animación activa.
+ * @param {object} props.estadisticas Estadísticas del backtracking.
+ * @param {string} props.mensajeRecorrido Mensaje del recorrido.
+ * @param {number} props.tamano Tamaño actual del tablero.
+ * @param {object} props.validacionTablero Resultado de validación.
+ * @returns {JSX.Element} Panel de estadísticas.
+ */
 function PanelEstadisticas({
   cantidadLibres,
   cantidadObstaculos,
