@@ -315,7 +315,8 @@ function App() {
     <main className="aplicacion">
       <header className="encabezado">
         <h1>Recorrido del Caballo</h1>
-        <p>Paso 4: visualización y documentación</p>
+        <p>Proyecto I: Análisis de algoritmos - Tecnológico de Costa Rica</p>
+        <p><i>Autores: Noé & Julián</i></p>
       </header>
 
       <section className="zona-trabajo">
