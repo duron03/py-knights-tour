@@ -42,7 +42,7 @@ npm run build
 
 ---
 
-## 3. Descripción del algoritmo de backtracking.
+## 3. Descripción detallada del algoritmo de backtracking.
 
 El recorrido del caballo se resuelve mediante un procedimiento de backtracking recursivo implementado en `src/algoritmos/knightsTour.js`. La aplicación separa la resolución del problema y la representación visual. El componente principal prepara el tablero, conserva los obstáculos definidos y delega el cálculo a la función `resolverRecorridoCaballo(tableroLimpio)`. Esta organización permite analizar el algoritmo como una unidad independiente y, posteriormente, utilizar sus resultados para actualizar la interfaz paso a paso.
 
@@ -70,7 +70,7 @@ Cuando no existe una casilla inicial disponible o cuando la exploración complet
 
 ---
 
-## 4. Conteo de caminos con programación dinámica.
+## 4. Descripción detallada del conteo de caminos con programación dinámica.
 
 El conteo de caminos se implementa en `src/algoritmos/conteoCaminos.js` mediante programación dinámica por tabulación. Este módulo aborda un problema distinto al recorrido completo del caballo: determinar cuántas secuencias de movimientos legales permiten llegar desde una casilla de origen hasta una casilla de destino en exactamente `K` movimientos. Por esta razón, el enfoque utilizado no requiere visitar todas las casillas ni evitar repeticiones, sino contar rutas posibles con una longitud fija.
 
