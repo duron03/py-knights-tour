@@ -1,8 +1,8 @@
 # py-knights-tour
 
 **Autores:**  
-Noé López Durón.
-Julián Pizarro Castro (GitHub: [@Julian3017](https://github.com/Julian3017)).
+- Noé López Durón.
+- Julián Pizarro Castro (GitHub: [@Julian3017](https://github.com/Julian3017)).
 
 ---
 
